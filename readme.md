@@ -1,4 +1,4 @@
-#### 《software engineer at google》翻译  
+#### 《software engineer at google》翻译，中文名是《在谷歌，软件工程是这样的》    
 [序言](./序言.md)  
 [前言](./前言.md)  
 [第一部分](./第一部分)   
