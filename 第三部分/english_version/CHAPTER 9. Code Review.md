@@ -79,31 +79,12 @@ This ownership mechanism is simple, yet powerful, and has scaled well over the p
 
 Code Review Benefits
 
-Across the industry, code review itself is not controversial, although it is far from a
-universal practice. Many (maybe even most) other companies and open source
-projects have some form of code review, and most view the process as important as a
-sanity check on the introduction of new code into a codebase. Software engineers
-understand some of the more obvious benefits of code review, even if they might not
-personally think it applies in all cases. But at Google, this process is generally more
-thorough and wide spread than at most other companies.
-Google’s culture, like that of a lot of software companies, is based on giving engineers
-wide latitude in how they do their jobs. There is a recognition that strict processes
-tend not to work well for a dynamic company needing to respond quickly to new
-technologies, and that bureaucratic rules tend not to work well with creative profes‐
-sionals. Code review, however, is a mandate, one of the few blanket processes in
-which all software engineers at Google must participate. Google requires code review
-for almost4 every code change to the codebase, no matter how small. This mandate
-does have a cost and effect on engineering velocity given that it does slow down the
-introduction of new code into a codebase and can impact time-to-production for any
-given code change. (Both of these are common complaints by software engineers of
-strict code review processes.) Why, then, do we require this process? Why do we
-believe that this is a long-term benefit?
-170 | Chapter 9: Code Review5 “Advances in Software Inspection,” IEEE Transactions on Software Engineering, SE-12(7): 744–751, July 1986.
-Granted, this study took place before robust tooling and automated testing had become so important in the
-software development process, but the results still seem relevant in the modern software age.
-6 Rigby, Peter C. and Christian Bird. 2013. “Convergent software peer review practices.” ESEC/FSE 2013: Pro‐
-ceedings of the 2013 9th Joint Meeting on Foundations of Software Engineering, August 2013: 202-212. https://
-dl.acm.org/doi/10.1145/2491411.2491444.
+Across the industry, code review itself is not controversial, although it is far from a universal practice. Many (maybe even most) other companies and open source projects have some form of code review, and most view the process as important as a sanity check on the introduction of new code into a codebase. Software engineers
+understand some of the more obvious benefits of code review, even if they might not personally think it applies in all cases. But at Google, this process is generally more thorough and wide spread than at most other companies.
+
+Google’s culture, like that of a lot of software companies, is based on giving engineers wide latitude in how they do their jobs. There is a recognition that strict processes tend not to work well for a dynamic company needing to respond quickly to new
+technologies, and that bureaucratic rules tend not to work well with creative professionals. Code review, however, is a mandate, one of the few blanket processes in which all software engineers at Google must participate. Google requires code review for almost4 every code change to the codebase, no matter how small. This mandate does have a cost and effect on engineering velocity given that it does slow down the introduction of new code into a codebase and can impact time-to-production for any given code change. (Both of these are common complaints by software engineers of strict code review processes.) Why, then, do we require this process? Why do we believe that this is a long-term benefit?
+
 A well-designed code review process and a culture of taking code review seriously
 provides the following benefits:
 • Checks code correctness
@@ -112,68 +93,33 @@ provides the following benefits:
 • Psychologically promotes team ownership
 • Enables knowledge sharing
 • Provides a historical record of the code review itself
-Many of these benefits are critical to a software organization over time, and many of
-them are beneficial to not only the author but also the reviewers. The following sec‐
-tions go into more specifics for each of these items.
-Code Correctness
-An obvious benefit of code review is that it allows a reviewer to check the “correct‐
-ness” of the code change. Having another set of eyes look over a change helps ensure
-that the change does what was intended. Reviewers typically look for whether a
-change has proper testing, is properly designed, and functions correctly and effi‐
-ciently. In many cases, checking code correctness is checking whether the particular
-change can introduce bugs into the codebase.
-Many reports point to the efficacy of code review in the prevention of future bugs in
-software. A study at IBM found that discovering defects earlier in a process, unsur‐
-prisingly, led to less time required to fix them later on.5 The investment in the time
-for code review saved time otherwise spent in testing, debugging, and performing
-regressions, provided that the code review process itself was streamlined to keep it
-lightweight. This latter point is important; code review processes that are heavy‐
-weight, or that don’t scale properly, become unsustainable.6 We will get into some best
-practices for keeping the process lightweight later in this chapter.
-To prevent the evaluation of correctness from becoming more subjective than objec‐
-tive, authors are generally given deference to their particular approach, whether it be
-in the design or the function of the introduced change. A reviewer shouldn’t propose
-Code Review Benefits | 171alternatives because of personal opinion. Reviewers can propose alternatives, but only
-if they improve comprehension (by being less complex, for example) or functionality
-(by being more efficient, for example). In general, engineers are encouraged to
-approve changes that improve the codebase rather than wait for consensus on a more
-“perfect” solution. This focus tends to speed up code reviews.
-As tooling becomes stronger, many correctness checks are performed automatically
-through techniques such as static analysis and automated testing (though tooling
-might never completely obviate the value for human-based inspection of code—see
-Chapter 20 for more information). Though this tooling has its limits, it has definitely
-lessoned the need to rely on human-based code reviews for checking code
-correctness.
-That said, checking for defects during the initial code review process is still an inte‐
-gral part of a general “shift left” strategy, aiming to discover and resolve issues at the
-earliest possible time so that they don’t require escalated costs and resources farther
-down in the development cycle. A code review is neither a panacea nor the only
-check for such correctness, but it is an element of a defense-in-depth against such
-problems in software. As a result, code review does not need to be “perfect” to achieve
-results.
-Surprisingly enough, checking for code correctness is not the primary benefit Google
-accrues from the process of code review. Checking for code correctness generally
-ensures that a change works, but more importance is attached to ensuring that a code
-change is understandable and makes sense over time and as the codebase itself scales.
+
+Many of these benefits are critical to a software organization over time, and many of them are beneficial to not only the author but also the reviewers. The following sections go into more specifics for each of these items.
+
+#### Code Correctness
+
+An obvious benefit of code review is that it allows a reviewer to check the “correctness” of the code change. Having another set of eyes look over a change helps ensure that the change does what was intended. Reviewers typically look for whether a change has proper testing, is properly designed, and functions correctly and efficiently. In many cases, checking code correctness is checking whether the particular change can introduce bugs into the codebase.
+
+Many reports point to the efficacy of code review in the prevention of future bugs in software. A study at IBM found that discovering defects earlier in a process, unsurprisingly, led to less time required to fix them later on.5 The investment in the time for code review saved time otherwise spent in testing, debugging, and performing regressions, provided that the code review process itself was streamlined to keep it lightweight. This latter point is important; code review processes that are heavyweight, or that don’t scale properly, become unsustainable.6 We will get into some best practices for keeping the process lightweight later in this chapter.
+
+To prevent the evaluation of correctness from becoming more subjective than objective, authors are generally given deference to their particular approach, whether it be in the design or the function of the introduced change. A reviewer shouldn’t propose alternatives because of personal opinion. Reviewers can propose alternatives, but only if they improve comprehension (by being less complex, for example) or functionality (by being more efficient, for example). In general, engineers are encouraged to approve changes that improve the codebase rather than wait for consensus on a more “perfect” solution. This focus tends to speed up code reviews.
+
+As tooling becomes stronger, many correctness checks are performed automatically through techniques such as static analysis and automated testing (though tooling might never completely obviate the value for human-based inspection of code—see
+Chapter 20 for more information). Though this tooling has its limits, it has definitely lessoned the need to rely on human-based code reviews for checking code correctness.
+
+That said, checking for defects during the initial code review process is still an integral part of a general “shift left” strategy, aiming to discover and resolve issues at the earliest possible time so that they don’t require escalated costs and resources farther down in the development cycle. A code review is neither a panacea nor the only check for such correctness, but it is an element of a defense-in-depth against such problems in software. As a result, code review does not need to be “perfect” to achieve results.
+
+Surprisingly enough, checking for code correctness is not the primary benefit Google accrues from the process of code review. Checking for code correctness generally ensures that a change works, but more importance is attached to ensuring that a code change is understandable and makes sense over time and as the codebase itself scales.
+
 To evaluate those aspects, we need to look at factors other than whether the code is
 simply logically “correct” or understood.
-Comprehension of Code
-A code review typically is the first opportunity for someone other than the author to
-inspect a change. This perspective allows a reviewer to do something that even the
-best engineer cannot do: provide feedback unbiased by an author’s perspective. A
-code review is often the first test of whether a given change is understandable to a
-broader audience. This perspective is vitally important because code will be read many
-more times than it is written, and understanding and comprehension are critically
-important.
-It is often useful to find a reviewer who has a different perspective from the author,
-especially a reviewer who might need, as part of their job, to maintain or use the code
-being proposed within the change. Unlike the deference reviewers should give
-authors regarding design decisions, it’s often useful to treat questions on code com‐
-prehension using the maxim “the customer is always right.” In some respect, any
-questions you get now will be multiplied many-fold over time, so view each question
-on code comprehension as valid. This doesn’t mean that you need to change your
-172 | Chapter 9: Code Reviewapproach or your logic in response to the criticism, but it does mean that you might
-need to explain it more clearly.
+
+#### Comprehension of Code
+
+A code review typically is the first opportunity for someone other than the author to inspect a change. This perspective allows a reviewer to do something that even the best engineer cannot do: provide feedback unbiased by an author’s perspective. A code review is often the first test of whether a given change is understandable to a broader audience. This perspective is vitally important because code will be read many more times than it is written, and understanding and comprehension are critically important.
+
+It is often useful to find a reviewer who has a different perspective from the author, especially a reviewer who might need, as part of their job, to maintain or use the code being proposed within the change. Unlike the deference reviewers should give authors regarding design decisions, it’s often useful to treat questions on code comprehension using the maxim “the customer is always right.” In some respect, any questions you get now will be multiplied many-fold over time, so view each question on code comprehension as valid. This doesn’t mean that you need to change your approach or your logic in response to the criticism, but it does mean that you might need to explain it more clearly.
+
 Together, the code correctness and code comprehension checks are the main criteria
 for an LGTM from another engineer, which is one of the approval bits needed for an
 approved code review. When an engineer marks a code review as LGTM, they are
