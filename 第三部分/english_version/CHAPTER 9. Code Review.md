@@ -1,7 +1,7 @@
-CHAPTER 9
-Code Review
-Written by Tom Manshreck and Caitlin Sadowski
-Edited by Lisa Carey
+## CHAPTER 9  Code Review
+Written by Tom Manshreck and Caitlin Sadowski  
+Edited by Lisa Carey  
+
 Code review is a process in which code is reviewed by someone other than the author,often before the introduction of that code into a codebase. Although that is a simple definition, implementations of the process of code review vary widely throughout the software industry. Some organizations have a select group of “gatekeepers” across the codebase that review changes. Others delegate code review processes to smaller teams, allowing different teams to require different levels of code review. At Google, essentially every change is reviewed before being committed, and every engineer is responsible for initiating reviews and reviewing changes.
 
 Code reviews generally require a combination of a process and a tool supporting that process. At Google, we use a custom code review tool, Critique, to support our process.1 Critique is an important enough tool at Google to warrant its own chapter in this book. This chapter focuses on the process of code review as it is practiced at Google rather than the specific tool, both because these foundations are older than the tool and because most of these insights can be adapted to whatever tool you might use for code review.
@@ -10,7 +10,7 @@ For more information on Critique, see Chapter 19.
 
 Some of the benefits of code review, such as detecting bugs in code before they enter a codebase, are well established and somewhat obvious (if imprecisely measured). Other benefits, however, are more subtle. Because the code review process at Google is so ubiquitous and extensive, we’ve noticed many of these more subtle effects, including psychological ones, which provide many benefits to an organization over time and scale.
 
-Code Review Flow
+### Code Review Flow
 
 Code reviews can happen at many stages of software development. At Google, code reviews take place before a change can be committed to the codebase; this stage is also known as a precommit review. The primary end goal of a code review is to get another engineer to consent to the change, which we denote by tagging the change as “looks good to me” (LGTM). We use this LGTM as a necessary permissions “bit” (combined with other bits noted below) to allow the change to be committed.
 
@@ -29,7 +29,7 @@ A typical code review at Google goes through the following steps:
 
 We’ll go over this process in more detail later in this chapter.
 
-Code Is a Liability
+#### Code Is a Liability
 
 It’s important to remember (and accept) that code itself is a liability. It might be a necessary liability, but by itself, code is simply a maintenance task to someone somewhere down the line. Much like the fuel that an airplane carries, it has weight, though it is, of course, necessary for that airplane to fly.
 
@@ -39,7 +39,7 @@ This is especially true of library or utility code. Chances are, if you are writ
 
 Of course, new projects happen, new techniques are introduced, new components are needed, and so on. All that said, a code review is not an occasion to rehash or debate previous design decisions. Design decisions often take time, requiring the circulation of design proposals, debate on the design in API reviews or similar meetings, and perhaps the development of prototypes. As much as a code review of entirely new code should not come out of the blue, the code review process itself should also not be viewed as an opportunity to revisit previous decisions.
 
-How Code Review Works at Google
+### How Code Review Works at Google
 
 We’ve pointed out roughly how the typical code review process works, but the devil is in the details. This section outlines in detail how code review works at Google and how these practices allow it to scale properly over time. 
 
@@ -61,9 +61,9 @@ approver is often looking for something different than a peer reviewer, in other
 
 If all three of these types of reviews can be handled by one reviewer, why not just have those types of reviewers handle all code reviews? The short answer is scale. Separating the three roles adds flexibility to the code review process. If you are working with a peer on a new function within a utility library, you can get someone on your team to review the code for code correctness and comprehension. After several rounds (perhaps over several days), your code satisfies your peer reviewer and you get an LGTM. Now, you need only get an owner of the library (and owners often have appropriate readability) to approve the change.
 
-Ownership
+#### Ownership
 
-Hyrum Wright
+** Hyrum Wright **
 
 When working on a small team in a dedicated repository, it’s common to grant the entire team access to everything in the repository. After all, you know the other engineers, the domain is narrow enough that each of you can be experts, and small numbers constrain the effect of potential errors.
 
@@ -77,7 +77,7 @@ This distributed ownership structure enables many of the other practices we’ve
 
 This ownership mechanism is simple, yet powerful, and has scaled well over the past two decades. It is one of the ways that Google ensures that tens of thousands of engineers can operate efficiently on billions of lines of code in a single repository.
 
-Code Review Benefits
+### Code Review Benefits
 
 Across the industry, code review itself is not controversial, although it is far from a universal practice. Many (maybe even most) other companies and open source projects have some form of code review, and most view the process as important as a sanity check on the introduction of new code into a codebase. Software engineers
 understand some of the more obvious benefits of code review, even if they might not personally think it applies in all cases. But at Google, this process is generally more thorough and wide spread than at most other companies.
@@ -120,173 +120,67 @@ A code review typically is the first opportunity for someone other than the auth
 
 It is often useful to find a reviewer who has a different perspective from the author, especially a reviewer who might need, as part of their job, to maintain or use the code being proposed within the change. Unlike the deference reviewers should give authors regarding design decisions, it’s often useful to treat questions on code comprehension using the maxim “the customer is always right.” In some respect, any questions you get now will be multiplied many-fold over time, so view each question on code comprehension as valid. This doesn’t mean that you need to change your approach or your logic in response to the criticism, but it does mean that you might need to explain it more clearly.
 
-Together, the code correctness and code comprehension checks are the main criteria
-for an LGTM from another engineer, which is one of the approval bits needed for an
-approved code review. When an engineer marks a code review as LGTM, they are
-saying that the code does what it says and that it is understandable. Google, however,
-also requires that the code be sustainably maintained, so we have additional approvals
-needed for code in certain cases.
-Code Consistency
-At scale, code that you write will be depended on, and eventually maintained, by
-someone else. Many others will need to read your code and understand what you did.
-Others (including automated tools) might need to refactor your code long after
-you’ve moved to another project. Code, therefore, needs to conform to some stand‐
-ards of consistency so that it can be understood and maintained. Code should also
-avoid being overly complex; simpler code is easier for others to understand and
-maintain as well. Reviewers can assess how well this code lives up to the standards of
-the codebase itself during code review. A code review, therefore, should act to ensure
-code health.
-It is for maintainability that the LGTM state of a code review (indicating code cor‐
-rectness and comprehension) is separated from that of readability approval. Readabil‐
-ity approvals can be granted only by individuals who have successfully gone through
-the process of code readability training in a particular programming language. For
-example, Java code requires approval from an engineer who has “Java readability.”
-A readability approver is tasked with reviewing code to ensure that it follows agreedon best practices for that particular programming language, is consistent with the
-codebase for that language within Google’s code repository, and avoids being overly
-complex. Code that is consistent and simple is easier to understand and easier for
-tools to update when it comes time for refactoring, making it more resilient. If a par‐
-ticular pattern is always done in one fashion in the codebase, it’s easier to write a tool
-to refactor it.
-Additionally, code might be written only once, but it will be read dozens, hundreds,
-or even thousands of times. Having code that is consistent across the codebase
-improves comprehension for all of engineering, and this consistency even affects the
-process of code review itself. Consistency sometimes clashes with functionality; a
-readability reviewer may prefer a less complex change that may not be functionally
-“better” but is easier to understand.
-With a more consistent codebase, it is easier for engineers to step in and review code
-on someone else’s projects. Engineers might occasionally need to look outside the
-Code Review Benefits | 173team for help in a code review. Being able to reach out and ask experts to review the
-code, knowing they can expect the code itself to be consistent, allows those engineers
-to focus more properly on code correctness and comprehension.
-Psychological and Cultural Benefits
-Code review also has important cultural benefits: it reinforces to software engineers
-that code is not “theirs” but in fact part of a collective enterprise. Such psychological
-benefits can be subtle but are still important. Without code review, most engineers
-would naturally gravitate toward personal style and their own approach to software
-design. The code review process forces an author to not only let others have input,
-but to compromise for the sake of the greater good.
-It is human nature to be proud of one’s craft and to be reluctant to open up one’s code
-to criticism by others. It is also natural to be somewhat reticent to welcome critical
-feedback about code that one writes. The code review process provides a mechanism
-to mitigate what might otherwise be an emotionally charged interaction. Code review,
-when it works best, provides not only a challenge to an engineer’s assumptions, but
-also does so in a prescribed, neutral manner, acting to temper any criticism which
-might otherwise be directed to the author if provided in an unsolicited manner. After
-all, the process requires critical review (we in fact call our code review tool “Cri‐
-tique”), so you can’t fault a reviewer for doing their job and being critical. The code
-review process itself, therefore, can act as the “bad cop,” whereas the reviewer can still
-be seen as the “good cop.”
-Of course, not all, or even most, engineers need such psychological devices. But
-buffering such criticism through the process of code review often provides a much
-gentler introduction for most engineers to the expectations of the team. Many engi‐
-neers joining Google, or a new team, are intimidated by code review. It is easy to
-think that any form of critical review reflects negatively on a person’s job perfor‐
-mance. But over time, almost all engineers come to expect to be challenged when
-sending a code review and come to value the advice and questions offered through
-this process (though, admittedly, this sometimes takes a while).
-Another psychological benefit of code review is validation. Even the most capable
-engineers can suffer from imposter syndrome and be too self-critical. A process like
-code review acts as validation and recognition for one’s work. Often, the process
-involves an exchange of ideas and knowledge sharing (covered in the next section),
-which benefits both the reviewer and the reviewee. As an engineer grows in their
-domain knowledge, it’s sometimes difficult for them to get positive feedback on how
+Together, the code correctness and code comprehension checks are the main criteria for an LGTM from another engineer, which is one of the approval bits needed for an approved code review. When an engineer marks a code review as LGTM, they are saying that the code does what it says and that it is understandable. Google, however, also requires that the code be sustainably maintained, so we have additional approvals needed for code in certain cases.
+
+#### Code Consistency
+At scale, code that you write will be depended on, and eventually maintained, by someone else. Many others will need to read your code and understand what you did. Others (including automated tools) might need to refactor your code long after you’ve moved to another project. Code, therefore, needs to conform to some standards of consistency so that it can be understood and maintained. Code should also avoid being overly complex; simpler code is easier for others to understand and maintain as well. Reviewers can assess how well this code lives up to the standards of the codebase itself during code review. A code review, therefore, should act to ensure code health.
+
+It is for maintainability that the LGTM state of a code review (indicating code correctness and comprehension) is separated from that of readability approval. Readability approvals can be granted only by individuals who have successfully gone through the process of code readability training in a particular programming language. For example, Java code requires approval from an engineer who has “Java readability.” 
+
+A readability approver is tasked with reviewing code to ensure that it follows agreedon best practices for that particular programming language, is consistent with the codebase for that language within Google’s code repository, and avoids being overly
+complex. Code that is consistent and simple is easier to understand and easier for tools to update when it comes time for refactoring, making it more resilient. If a par‐ ticular pattern is always done in one fashion in the codebase, it’s easier to write a tool to refactor it.
+
+Additionally, code might be written only once, but it will be read dozens, hundreds, or even thousands of times. Having code that is consistent across the codebase improves comprehension for all of engineering, and this consistency even affects the process of code review itself. Consistency sometimes clashes with functionality; a readability reviewer may prefer a less complex change that may not be functionally “better” but is easier to understand.
+
+With a more consistent codebase, it is easier for engineers to step in and review code on someone else’s projects. Engineers might occasionally need to look outside the team for help in a code review. Being able to reach out and ask experts to review the
+code, knowing they can expect the code itself to be consistent, allows those engineers to focus more properly on code correctness and comprehension.
+
+#### Psychological and Cultural Benefits
+
+Code review also has important cultural benefits: it reinforces to software engineers that code is not “theirs” but in fact part of a collective enterprise. Such psychological benefits can be subtle but are still important. Without code review, most engineers would naturally gravitate toward personal style and their own approach to software design. The code review process forces an author to not only let others have input, but to compromise for the sake of the greater good.
+
+It is human nature to be proud of one’s craft and to be reluctant to open up one’s code to criticism by others. It is also natural to be somewhat reticent to welcome critical feedback about code that one writes. The code review process provides a mechanism to mitigate what might otherwise be an emotionally charged interaction. Code review, when it works best, provides not only a challenge to an engineer’s assumptions, but also does so in a prescribed, neutral manner, acting to temper any criticism which might otherwise be directed to the author if provided in an unsolicited manner. After all, the process requires critical review (we in fact call our code review tool “Critique”), so you can’t fault a reviewer for doing their job and being critical. The code review process itself, therefore, can act as the “bad cop,” whereas the reviewer can still be seen as the “good cop.”
+
+Of course, not all, or even most, engineers need such psychological devices. But buffering such criticism through the process of code review often provides a much gentler introduction for most engineers to the expectations of the team. Many engineers joining Google, or a new team, are intimidated by code review. It is easy to think that any form of critical review reflects negatively on a person’s job performance. But over time, almost all engineers come to expect to be challenged when sending a code review and come to value the advice and questions offered through this process (though, admittedly, this sometimes takes a while).
+
+Another psychological benefit of code review is validation. Even the most capable engineers can suffer from imposter syndrome and be too self-critical. A process like code review acts as validation and recognition for one’s work. Often, the process involves an exchange of ideas and knowledge sharing (covered in the next section), which benefits both the reviewer and the reviewee. As an engineer grows in their domain knowledge, it’s sometimes difficult for them to get positive feedback on how
 they improve. The process of code review can provide that mechanism.
-The process of initiating a code review also forces all authors to take a little extra care
-with their changes. Many software engineers are not perfectionists; most will admit
-that code that “gets the job done” is better than code that is perfect but that takes too
-174 | Chapter 9: Code Reviewlong to develop. Without code review, it’s natural that many of us would cut corners,
-even with the full intention of correcting such defects later. “Sure, I don’t have all of
-the unit tests done, but I can do that later.” A code review forces an engineer to
-resolve those issues before sending the change. Collecting the components of a
-change for code review psychologically forces an engineer to make sure that all of
-their ducks are in a row. The little moment of reflection that comes before sending off
-your change is the perfect time to read through your change and make sure you’re
-not missing anything.
-Knowledge Sharing
-One of the most important, but underrated, benefits of code review is in knowledge
-sharing. Most authors pick reviewers who are experts, or at least knowledgeable, in
-the area under review. The review process allows reviewers to impart domain knowl‐
-edge to the author, allowing the reviewer(s) to offer suggestions, new techniques, or
-advisory information to the author. (Reviewers can even mark some comments “FYI,”
-requiring no action; they are simply added as an aid to the author.) Authors who
-become particularly proficient in an area of the codebase will often become owners as
-well, who then in turn will be able to act as reviewers for other engineers.
-Part of the code review process of feedback and confirmation involves asking ques‐
-tions on why the change is done in a particular way. This exchange of information
-facilitates knowledge sharing. In fact, many code reviews involve an exchange of
-information both ways: the authors as well as the reviewers can learn new techniques
-and patterns from code review. At Google, reviewers may even directly share sug‐
-gested edits with an author within the code review tool itself.
-An engineer may not read every email sent to them, but they tend to respond to every
-code review sent. This knowledge sharing can occur across time zones and projects as
-well, using Google’s scale to disseminate information quickly to engineers in all cor‐
-ners of the codebase. Code review is a perfect time for knowledge transfer: it is timely
-and actionable. (Many engineers at Google “meet” other engineers first through their
-code reviews!)
-Given the amount of time Google engineers spend in code review, the knowledge
-accrued is quite significant. A Google engineer’s primary task is still programming, of
-course, but a large chunk of their time is still spent in code review. The code review
-process provides one of the primary ways that software engineers interact with one
-another and exchange information about coding techniques. Often, new patterns are
-advertised within the context of code review, sometimes through refactorings such as
-large-scale changes.
-Moreover, because each change becomes part of the codebase, code review acts as a
-historical record. Any engineer can inspect the Google codebase and determine when
-some particular pattern was introduced and bring up the actual code review in
-Code Review Benefits | 175question. Often, that archeology provides insights to many more engineers than the
-original author and reviewer(s).
-Code Review Best Practices
-Code review can, admittedly, introduce friction and delay to an organization. Most of
-these issues are not problems with code review per se, but with their chosen imple‐
-mentation of code review. Keeping the code review process running smoothly at Goo‐
-gle is no different, and it requires a number of best practices to ensure that code
-review is worth the effort put into the process. Most of those practices emphasize
-keeping the process nimble and quick so that code review can scale properly.
-Be Polite and Professional
-As pointed out in the Culture section of this book, Google heavily fosters a culture of
-trust and respect. This filters down into our perspective on code review. A software
-engineer needs an LGTM from only one other engineer to satisfy our requirement on
-code comprehension, for example. Many engineers make comments and LGTM a
-change with the understanding that the change can be submitted after those changes
-are made, without any additional rounds of review. That said, code reviews can intro‐
-duce anxiety and stress to even the most capable engineers. It is critically important
-to keep all feedback and criticism firmly in the professional realm.
-In general, reviewers should defer to authors on particular approaches and only point
-out alternatives if the author’s approach is deficient. If an author can demonstrate that
-several approaches are equally valid, the reviewer should accept the preference of the
-author. Even in those cases, if defects are found in an approach, consider the review a
-learning opportunity (for both sides!). All comments should remain strictly profes‐
-sional. Reviewers should be careful about jumping to conclusions based on a code
-author’s particular approach. It’s better to ask questions on why something was done
-the way it was before assuming that approach is wrong.
-Reviewers should be prompt with their feedback. At Google, we expect feedback from
-a code review within 24 (working) hours. If a reviewer is unable to complete a review
-in that time, it’s good practice (and expected) to respond that they’ve at least seen the
-change and will get to the review as soon as possible. Reviewers should avoid
-responding to the code review in piecemeal fashion. Few things annoy an author
-more than getting feedback from a review, addressing it, and then continuing to get
+
+The process of initiating a code review also forces all authors to take a little extra care with their changes. Many software engineers are not perfectionists; most will admit that code that “gets the job done” is better than code that is perfect but that takes too long to develop. Without code review, it’s natural that many of us would cut corners, even with the full intention of correcting such defects later. “Sure, I don’t have all of the unit tests done, but I can do that later.” A code review forces an engineer to resolve those issues before sending the change. Collecting the components of a change for code review psychologically forces an engineer to make sure that all of their ducks are in a row. The little moment of reflection that comes before sending off your change is the perfect time to read through your change and make sure you’re not missing anything.
+
+#### Knowledge Sharing
+One of the most important, but underrated, benefits of code review is in knowledge sharing. Most authors pick reviewers who are experts, or at least knowledgeable, in the area under review. The review process allows reviewers to impart domain knowledge to the author, allowing the reviewer(s) to offer suggestions, new techniques, or advisory information to the author. (Reviewers can even mark some comments “FYI,” requiring no action; they are simply added as an aid to the author.) Authors who become particularly proficient in an area of the codebase will often become owners as well, who then in turn will be able to act as reviewers for other engineers.
+
+Part of the code review process of feedback and confirmation involves asking questions on why the change is done in a particular way. This exchange of information facilitates knowledge sharing. In fact, many code reviews involve an exchange of information both ways: the authors as well as the reviewers can learn new techniques and patterns from code review. At Google, reviewers may even directly share suggested edits with an author within the code review tool itself.
+
+An engineer may not read every email sent to them, but they tend to respond to every code review sent. This knowledge sharing can occur across time zones and projects as well, using Google’s scale to disseminate information quickly to engineers in all corners of the codebase. Code review is a perfect time for knowledge transfer: it is timely and actionable. (Many engineers at Google “meet” other engineers first through their code reviews!)
+
+Given the amount of time Google engineers spend in code review, the knowledge accrued is quite significant. A Google engineer’s primary task is still programming, of course, but a large chunk of their time is still spent in code review. The code review
+process provides one of the primary ways that software engineers interact with one another and exchange information about coding techniques. Often, new patterns are advertised within the context of code review, sometimes through refactorings such as large-scale changes.
+
+Moreover, because each change becomes part of the codebase, code review acts as a historical record. Any engineer can inspect the Google codebase and determine when some particular pattern was introduced and bring up the actual code review in question. Often, that archeology provides insights to many more engineers than the original author and reviewer(s).
+
+### Code Review Best Practices
+
+Code review can, admittedly, introduce friction and delay to an organization. Most of these issues are not problems with code review per se, but with their chosen implementation of code review. Keeping the code review process running smoothly at Google is no different, and it requires a number of best practices to ensure that code review is worth the effort put into the process. Most of those practices emphasize keeping the process nimble and quick so that code review can scale properly.
+
+#### Be Polite and Professional
+As pointed out in the Culture section of this book, Google heavily fosters a culture of trust and respect. This filters down into our perspective on code review. A software engineer needs an LGTM from only one other engineer to satisfy our requirement on
+code comprehension, for example. Many engineers make comments and LGTM a change with the understanding that the change can be submitted after those changes are made, without any additional rounds of review. That said, code reviews can introduce anxiety and stress to even the most capable engineers. It is critically important to keep all feedback and criticism firmly in the professional realm.
+
+In general, reviewers should defer to authors on particular approaches and only point out alternatives if the author’s approach is deficient. If an author can demonstrate that several approaches are equally valid, the reviewer should accept the preference of the author. Even in those cases, if defects are found in an approach, consider the review a learning opportunity (for both sides!). All comments should remain strictly professional. Reviewers should be careful about jumping to conclusions based on a code author’s particular approach. It’s better to ask questions on why something was done the way it was before assuming that approach is wrong.
+
+Reviewers should be prompt with their feedback. At Google, we expect feedback from a code review within 24 (working) hours. If a reviewer is unable to complete a review in that time, it’s good practice (and expected) to respond that they’ve at least seen the change and will get to the review as soon as possible. Reviewers should avoid responding to the code review in piecemeal fashion. Few things annoy an author more than getting feedback from a review, addressing it, and then continuing to get
 unrelated further feedback in the review process.
-As much as we expect professionalism on the part of the reviewer, we expect profes‐
-sionalism on the part of the author as well. Remember that you are not your code,
-and that this change you propose is not “yours” but the team’s. After you check that
-piece of code into the codebase, it is no longer yours in any case. Be receptive to
-176 | Chapter 9: Code Reviewquestions on your approach, and be prepared to explain why you did things in certain
-ways. Remember that part of the responsibility of an author is to make sure this code
-is understandable and maintainable for the future.
-It’s important to treat each reviewer comment within a code review as a TODO item;
-a particular comment might not need to be accepted without question, but it should
-at least be addressed. If you disagree with a reviewer’s comment, let them know, and
-let them know why and don’t mark a comment as resolved until each side has had a
-chance to offer alternatives. One common way to keep such debates civil if an author
-doesn’t agree with a reviewer is to offer an alternative and ask the reviewer to PTAL
-(please take another look). Remember that code review is a learning opportunity for
-both the reviewer and the author. That insight often helps to mitigate any chances for
-disagreement.
-By the same token, if you are an owner of code and responding to a code review
-within your codebase, be amenable to changes from an outside author. As long as the
-change is an improvement to the codebase, you should still give deference to the
-author that the change indicates something that could and should be improved.
-Write Small Changes
+
+As much as we expect professionalism on the part of the reviewer, we expect professionalism on the part of the author as well. Remember that you are not your code, and that this change you propose is not “yours” but the team’s. After you check that piece of code into the codebase, it is no longer yours in any case. Be receptive to questions on your approach, and be prepared to explain why you did things in certain ways. Remember that part of the responsibility of an author is to make sure this code is understandable and maintainable for the future.
+
+It’s important to treat each reviewer comment within a code review as a TODO item; a particular comment might not need to be accepted without question, but it should at least be addressed. If you disagree with a reviewer’s comment, let them know, and let them know why and don’t mark a comment as resolved until each side has had a chance to offer alternatives. One common way to keep such debates civil if an author doesn’t agree with a reviewer is to offer an alternative and ask the reviewer to PTAL (please take another look). Remember that code review is a learning opportunity for both the reviewer and the author. That insight often helps to mitigate any chances for disagreement.
+
+By the same token, if you are an owner of code and responding to a code review within your codebase, be amenable to changes from an outside author. As long as the change is an improvement to the codebase, you should still give deference to the author that the change indicates something that could and should be improved.
+
+#### Write Small Changes
+
 Probably the most important practice to keep the code review process nimble is to
 keep changes small. A code review should ideally be easy to digest and focus on a sin‐
 gle issue, both for the reviewer and the author. Google’s code review process discour‐
