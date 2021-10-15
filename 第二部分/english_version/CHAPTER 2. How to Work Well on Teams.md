@@ -12,47 +12,47 @@ People are inherently imperfect—we like to say that humans are mostly a collec
 
 The critical idea in this chapter is that software development is a team endeavor. And to succeed on an engineering team—or in any other creative collaboration—you need to reorganize your behaviors around the core principles of humility, respect, and trust.
 
-Before we get ahead of ourselves, let’s begin by observing how software engineers tend to behave in general.### Help Me Hide My Code
+Before we get ahead of ourselves, let’s begin by observing how software engineers tend to behave in general.
 
-For the past 20 years, my colleague Ben and I have spoken at many programmingconferences. In 2006, we launched Google’s (now deprecated) open source Project Hosting service, and at first, we used to get lots of questions and requests about the product. But around mid-2008, we began to notice a trend in the sort of requests we were getting:    “Can you please give Subversion on Google Code the ability to hide specific branches?”    “Can you make it possible to create open source projects that start out hidden to the world and then are revealed when they’re ready?”    “Hi, I want to rewrite all my code from scratch, can you please wipe all the history?”
+### Help Me Hide My Code
+
+For the past 20 years, my colleague Ben and I have spoken at many programming conferences. In 2006, we launched Google’s (now deprecated) open source Project Hosting service, and at first, we used to get lots of questions and requests about the product. But around mid-2008, we began to notice a trend in the sort of requests we were getting:    “Can you please give Subversion on Google Code the ability to hide specific branches?”    “Can you make it possible to create open source projects that start out hidden to the world and then are revealed when they’re ready?”    “Hi, I want to rewrite all my code from scratch, can you please wipe all the history?”
 
 Can you spot a common theme to these requests?
 
-The answer is insecurity. People are afraid of others seeing and judging their work in progress. In one sense, insecurity is just a part of human nature—nobody likes to be criticized, especially for things that aren’t finished. Recognizing this theme tipped us off to a more general trend within software development: insecurity is actually a symptom of a larger problem.### The Genius Myth
+The answer is insecurity. People are afraid of others seeing and judging their work in progress. In one sense, insecurity is just a part of human nature—nobody likes to be criticized, especially for things that aren’t finished. Recognizing this theme tipped us off to a more general trend within software development: insecurity is actually a symptom of a larger problem.
+
+### The Genius Myth
 
 Many humans have the instinct to find and worship idols. For software engineers, those might be Linus Torvalds, Guido Van Rossum, Bill Gates—all heroes who changed the world with heroic feats. Linus wrote Linux by himself, right?
 
-Actually, what Linus did was write just the beginnings of a proof-of-concept Unixlike kernel and show it to an email list. That was no small accomplishment, and it was definitely an impressive achievement, but it was just the tip of the iceberg. Linux is hundreds of times bigger than that initial kernel and was developed by thousands of smart people. Linus’ real achievement was to lead these people and coordinate their work; Linux is the shining result not of his original idea, but of the collective labor of the community. (And Unix itself was not entirely written by Ken Thompson and
+Actually, what Linus did was write just the beginnings of a proof-of-concept Unixlike kernel and show it to an email list. That was no small accomplishment, and it was definitely an impressive achievement, but it was just the tip of the iceberg. Linux is hundreds of times bigger than that initial kernel and was developed by thousands of smart people. Linus’ real achievement was to lead these people and coordinate their work; Linux is the shining result not of his original idea, but of the collective labor of the community. (And Unix itself was not entirely written by Ken Thompson and Dennis Ritchie, but by a group of smart people at Bell Labs.)
 
-Dennis Ritchie, but by a group of smart people at Bell Labs.)
-
-On that same note, did Guido Van Rossum personally write all of Python? Certainly, he wrote the first version. But hundreds of others were responsible for contributing to subsequent versions, including ideas, features, and bug fixes. Steve Jobs led an entire team that built the Macintosh, and although Bill Gates is known for writing a
-
-BASIC interpreter for early home computers, his bigger achievement was building asuccessful company around MS-DOS. Yet they all became leaders and symbols of thecollective achievements of their communities. The Genius Myth is the tendency thatwe as humans need to ascribe the success of a team to a single person/leader.
+On that same note, did Guido Van Rossum personally write all of Python? Certainly, he wrote the first version. But hundreds of others were responsible for contributing to subsequent versions, including ideas, features, and bug fixes. Steve Jobs led an entire team that built the Macintosh, and although Bill Gates is known for writing a BASIC interpreter for early home computers, his bigger achievement was building a successful company around MS-DOS. Yet they all became leaders and symbols of the collective achievements of their communities. The Genius Myth is the tendency that we as humans need to ascribe the success of a team to a single person/leader.
 
 And what about Michael Jordan?
 
-It’s the same story. We idolized him, but the fact is that he didn’t win every basketballgame by himself. His true genius was in the way he worked with his team. The team’scoach, Phil Jackson, was extremely clever, and his coaching techniques are legendary.28 | Chapter 2: How to Work Well on Teams
+It’s the same story. We idolized him, but the fact is that he didn’t win every basketballgame by himself. His true genius was in the way he worked with his team. The team’scoach, Phil Jackson, was extremely clever, and his coaching techniques are legendary. He recognized that one player alone never wins a championship, and so he assembledan entire “dream team” around MJ. This team was a well-oiled machine—at least asimpressive as Michael himself.
 
-He recognized that one player alone never wins a championship, and so he assembledan entire “dream team” around MJ. This team was a well-oiled machine—at least asimpressive as Michael himself.
+So, why do we repeatedly idolize the individual in these stories? Why do people buy products endorsed by celebrities? Why do we want to buy Michelle Obama’s dress or Michael Jordan’s shoes?
 
-So, why do we repeatedly idolize the individual in these stories? Why do people buyproducts endorsed by celebrities? Why do we want to buy Michelle Obama’s dress or
+Celebrity is a big part of it. Humans have a natural instinct to find leaders and rolemodels, idolize them, and attempt to imitate them. We all need heroes for inspiration,and the programming world has its heroes, too. The phenomenon of “techiecelebrity”has almost spilled over into mythology. We all want to write something world-changing like Linux or design the next brilliant programming language.
 
-Michael Jordan’s shoes?
-
-Celebrity is a big part of it. Humans have a natural instinct to find leaders and rolemodels, idolize them, and attempt to imitate them. We all need heroes for inspiration,and the programming world has its heroes, too. The phenomenon of “techiecelebrity”has almost spilled over into mythology. We all want to write somethingworld-changing like Linux or design the next brilliant programming language.
-
-Deep down, many engineers secretly wish to be seen as geniuses. This fantasy goessomething like this:• You are struck by an awesome new concept.• You vanish into your cave for weeks or months, slaving away at a perfect implementationof your idea.• You then “unleash” your software on the world, shocking everyone with yourgenius.• Your peers are astonished by your cleverness.• People line up to use your software.• Fame and fortune follow naturally.
+Deep down, many engineers secretly wish to be seen as geniuses. This fantasy goes something like this:
+• You are struck by an awesome new concept.
+• You vanish into your cave for weeks or months, slaving away at a perfect implementationof your idea.
+• You then “unleash” your software on the world, shocking everyone with yourgenius.
+• Your peers are astonished by your cleverness.
+• People line up to use your software.
+• Fame and fortune follow naturally.
 
 But hold on: time for a reality check. You’re probably not a genius.
 
-No offense, of course—we’re sure that you’re a very intelligent person. But do yourealize how rare actual geniuses really are? Sure, you write code, and that’s a trickyskill. But even if you are a genius, it turns out that that’s not enough. Geniuses stillmake mistakes, and having brilliant ideas and elite programming skills doesn’t guaranteethat your software will be a hit. Worse, you might find yourself solving onlyanalytical problems and not human problems. Being a genius is most definitely notan excuse for being a jerk: anyone—genius or not—with poor social skills tends to bea poor teammate. The vast majority of the work at Google (and at most companies!)doesn’t require genius-level intellect, but 100% of the work requires a minimal level ofsocial skills. What will make or break your career, especially at a company like
-
-Google, is how well you collaborate with others.
+No offense, of course—we’re sure that you’re a very intelligent person. But do you realize how rare actual geniuses really are? Sure, you write code, and that’s a tricky skill. But even if you are a genius, it turns out that that’s not enough. Geniuses still make mistakes, and having brilliant ideas and elite programming skills doesn’t guarantee that your software will be a hit. Worse, you might find yourself solving only analytical problems and not human problems. Being a genius is most definitely not an excuse for being a jerk: anyone—genius or not—with poor social skills tends to be a poor teammate. The vast majority of the work at Google (and at most companies!)doesn’t require genius-level intellect, but 100% of the work requires a minimal level of social skills. What will make or break your career, especially at a company like Google, is how well you collaborate with others.
 
 It turns out that this Genius Myth is just another manifestation of our insecurity.
 
-Many programmers are afraid to share work they’ve only just started because itmeans peers will see their mistakes and know the author of the code is not a genius.
+Many programmers are afraid to share work they’ve only just started because it means peers will see their mistakes and know the author of the code is not a genius.
 
 The Genius Myth | 29
 
@@ -62,9 +62,9 @@ I know I get SERIOUSLY insecure about people looking before something is done.
 
 Like they are going to seriously judge me and think I’m an idiot.
 
-This is an extremely common feeling among programmers, and the natural reactionis to hide in a cave, work, work, work, and then polish, polish, polish, sure that noone will see your goof-ups and that you’ll still have a chance to unveil your masterpiecewhen you’re done. Hide away until your code is perfect.
+This is an extremely common feeling among programmers, and the natural reactionis to hide in a cave, work, work, work, and then polish, polish, polish, sure that no one will see your goof-ups and that you’ll still have a chance to unveil your masterpiece when you’re done. Hide away until your code is perfect.
 
-Another common motivation for hiding your work is the fear that another programmermight take your idea and run with it before you get around to working on it. Bykeeping it secret, you control the idea.
+Another common motivation for hiding your work is the fear that another programmer might take your idea and run with it before you get around to working on it. Bykeeping it secret, you control the idea.
 
 We know what you’re probably thinking now: so what? Shouldn’t people be allowedto work however they want?
 
