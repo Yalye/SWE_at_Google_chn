@@ -120,15 +120,13 @@ Other teams have tokens or stuffed animals that team members put on their monito
 
 Don’t misunderstand us—we still think engineers need uninterrupted time to focus on writing code, but we think they need a high-bandwidth, low-friction connection to their team just as much. If less-knowledgeable people on your team feel that there’s a barrier to asking you a question, it’s a problem: finding the right balance is an art. 
 
-Hiding Considered Harmful | 33 
-
-In Short, Don’t Hide 
+#### In Short, Don’t Hide 
 
 So, what “hiding” boils down to is this: working alone is inherently riskier than working with others. Even though you might be afraid of someone stealing your idea or thinking you’re not intelligent, you should be much more concerned about wasting huge swaths of your time toiling away on the wrong thing. 
 
 Don’t become another statistic. 
 
-It’s All About the Team 
+### It’s All About the Team 
 
 So, let’s back up now and put all of these ideas together. 
 
