@@ -142,7 +142,7 @@ Consider this: how many pieces of widely used, successful software can you name 
 
 High-functioning teams are gold and the true key to success. You should be aiming for this experience however you can. 
 
-The Three Pillars of Social Interaction 
+### The Three Pillars of Social Interaction 
 
 So, if teamwork is the best route to producing great software, how does one build (or find) a great team? 
 
