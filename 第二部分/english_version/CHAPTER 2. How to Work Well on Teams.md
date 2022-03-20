@@ -16,7 +16,7 @@ The critical idea in this chapter is that software development is a team endeavo
 
 Before we get ahead of ourselves, let’s begin by observing how software engineers tend to behave in general. 
 
-Help Me Hide My Code 
+#### Help Me Hide My Code 
 
 For the past 20 years, my colleague Ben and I have spoken at many programming conferences. In 2006, we launched Google’s (now deprecated) open source Project Hosting service, and at first, we used to get lots of questions and requests about the product. But around mid-2008, we began to notice a trend in the sort of requests we were getting: “Can you please give Subversion on Google Code the ability to hide specific branches?” “Can you make it possible to create open source projects that start out hidden to the world and then are revealed when they’re ready?” “Hi, I want to rewrite all my code from scratch, can you please wipe all the history?” 
 
