@@ -46,7 +46,8 @@ Deep down, many engineers secretly wish to be seen as geniuses. This fantasy goe
 • You are struck by an awesome new concept. 
 • You vanish into your cave for weeks or months, slaving away at a perfect implementation of your idea. 
 • You then “unleash” your software on the world, shocking everyone with your genius. 
-• Your peers are astonished by your cleverness. • People line up to use your software. 
+• Your peers are astonished by your cleverness. 
+• People line up to use your software. 
 • Fame and fortune follow naturally. 
 
 But hold on: time for a reality check. You’re probably not a genius. 
